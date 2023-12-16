@@ -47,13 +47,13 @@ while true; do
 
   if [ ${i} -eq 0 ]; then # 親
     score=$(echo ${score} | sed -e "s/.*,//g")
-    ron=$(echo ${score} | grep -o ".*ron-" | sed -e "s/ron-//")
+    ron=$(echo ${score} | grep -o ".*ron" | sed -e "s/ron//")
     if [ -n "${ron}" ]; then ron=$(echo "${ron}+300*${hon}"|bc); echo "  ron: ${ron}"; fi
-    tsumo=$(echo ${score} | grep -o "\-.*all" | sed -e "s/-//" -e "s/all//")
+    tsumo=$(echo ${score} | grep -o "[0-9]*all" | sed -e "s/all//")
     if [ -n "${tsumo}" ]; then tsumo=$(echo "${tsumo}+100*${hon}"|bc); echo "  tsumo: ${tsumo}all"; fi
   else # 子
     score=$(echo ${score} | sed -e "s/,.*//g")
-    ron=$(echo ${score} | grep -o ".*ron-" | sed -e "s/ron-//")
+    ron=$(echo ${score} | grep -o ".*ron" | sed -e "s/ron//")
     if [ -n "${ron}" ]; then ron=$(echo "${ron}+300*${hon}"|bc); echo "  ron: ${ron}"; fi
     tsumo=$(echo ${score} | sed -r "s/.*ron-?//")
     if [ -n "${tsumo}" ]; then 
