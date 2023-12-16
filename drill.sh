@@ -1,5 +1,11 @@
 #!/bin/bash
 
+function rd() {
+  read input
+  input=${input:0:1}
+  if [ "${input}" = "q" -o "${input}" = "Q" ]; then exit; fi
+}
+
 # x符y翻の点数は，y<=4で ${scores_le4[$((X*4+y-1))]} , y>4で ${scores_gt4[$((y-5))]}
 # x: 20, 25, 30, 40, 50, 60, 70, 80, 90
 # X:  0,  1,  2,  3,  4,  5,  6,  7,  8
@@ -40,8 +46,7 @@ while true; do
   if [ ${score} = "NA" ]; then continue; fi
 
   echo "Q: ${hon}本場 ${wind[${i}]}家 ${han}翻 ${fu}符"
-  read isquit; isquit=${isquit:0:1}
-  if [ "${isquit}" = "q" -o "${isquit}" = "Q" ]; then exit; fi
+  rd
 
   echo "A:"
 
@@ -65,8 +70,7 @@ while true; do
     fi
   fi
 
-  read isquit; isquit=${isquit:0:1}
-  if [ "${isquit}" = "q" -o "${isquit}" = "Q" ]; then exit; fi
+  rd
 
   if [ $(($RANDOM%4)) -ne 1 ]; then
     i=$(( (${i} + 1) % 4 ))
